@@ -1,0 +1,37 @@
+version: '2'
+services:
+  transmission:
+    container_name: transmission
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./transmission.dockerfile
+    ports:
+      - "9091:9091"
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    networks:
+      transmission:
+        ipv4_address: 192.168.2.2
+    
+    volumes:
+      - /netstorage/torrents:/torrents
+      - /netstorage/downloads:/downloads
+      - transmission-data:/home/sharing/.config/transmission-daemon
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0
+
+volumes:
+  transmission-data:
+    external: true
+
+networks:
+  transmission:
+    name: transmission
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.2.0/24"
+          gateway: "192.168.2.1"

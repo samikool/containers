@@ -1,0 +1,20 @@
+version: '2'
+services:
+  readarr:
+    container_name: readarr
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./readarr.dockerfile
+    ports:
+      - "8787:8787"
+    network_mode: "host"
+    user: readarr
+    volumes:
+      - /netstorage/books:/books
+      - /netstorage/downloads:/downloads
+      - readarr-data:/config
+
+volumes:
+  readarr-data:
+    external: true

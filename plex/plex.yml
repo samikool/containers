@@ -1,0 +1,18 @@
+version: '2'
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      - TZ=US/Central
+      - PLEX_CLAIM=<claimToken>
+    network_mode: host
+    volumes:
+      - plex-data:/config
+      - /tmp/plexmediaserver/Transcode:/transcode
+      - /netstorage/movies:/movies
+      - /netstorage/tv-shows:/tv-shows
+volumes:
+  plex-data:
+    external: true

@@ -1,0 +1,20 @@
+version: '2'
+services:
+  lidarr:
+    container_name: lidarr
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./lidarr.dockerfile
+    ports:
+      - "8686:8686"
+    network_mode: "host"
+    user: lidarr
+    volumes:
+      - /netstorage/music:/music
+      - /netstorage/downloads:/downloads
+      - lidarr-data:/config
+
+volumes:
+  lidarr-data:
+    external: true

@@ -1,0 +1,20 @@
+version: '2'
+services:
+  sonarr:
+    container_name: sonarr
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./sonarr.dockerfile
+    ports:
+      - "8989:8989"
+    network_mode: "host"
+    user: sonarr
+    volumes:
+      - /netstorage/tv-shows:/tv-shows
+      - /netstorage/downloads:/downloads
+      - sonarr-data:/config
+
+volumes:
+  sonarr-data:
+    external: true
