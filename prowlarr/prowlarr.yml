@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./prowlarr.dockerfile
-    ports:
-      - "9696:9696"
     network_mode: "host"
     user: prowlarr
     volumes:

@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./readarr.dockerfile
-    ports:
-      - "8787:8787"
     network_mode: "host"
     user: readarr
     volumes:

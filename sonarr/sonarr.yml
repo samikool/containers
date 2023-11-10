@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./sonarr.dockerfile
-    ports:
-      - "8989:8989"
     network_mode: "host"
     user: sonarr
     volumes:

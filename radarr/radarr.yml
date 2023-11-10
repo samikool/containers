@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./radarr.dockerfile
-    ports:
-      - "7878:7878"
     network_mode: "host"
     user: radarr
     volumes:
